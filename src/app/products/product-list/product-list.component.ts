@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Product} from '../../shared/model/Product';
 import {ProductService} from '../../shared/services/product.service';
+
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
@@ -12,18 +13,17 @@ export class ProductListComponent implements OnInit {
   constructor(private productService: ProductService) {
   }
 
-  ngOnInit():{
-    this.refresh;
+  ngOnInit(){
+    this.refresh();
   }
 
-  refresh()
-  {
+  refresh() {
     this.productService.getProducts().subscribe(listOfProducts => {
       this.products = listOfProducts;
-    })
+    });
   }
-  delete (id: number)
-  {
+
+  delete (id: number) {
     this.productService.deleteProduct(id)
       .subscribe(message => {
         console.log('Deleted Product: ' + message);

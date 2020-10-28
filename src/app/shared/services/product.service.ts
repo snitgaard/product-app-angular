@@ -14,24 +14,30 @@ export class ProductService {
   constructor(private http: HttpClient) {
     this.products = [
       {
-        id: this.id++, name: "Barack Obama", color: "yellow", price: 1500, type: "president"
+        id: this.id++, name: 'Johnny Bravo', color: 'Yellow',
+        price: 1000, type: 'Dog'
       },
       {
-        id: this.id++, name: "Osama bin Laden", color: "brown", price: 15300, type: "arab"
-      },
-      {
-        id: this.id++, name: "Johnny Bravo", color: "yellow", price: 100, type: "sexet"
+        id: this.id++, name: 'Obama', color: 'Hmm',
+        price: 15000, type: 'Cat'
       }];
   }
   getProductById(id)
   {
-    return this.products.find(pet => pet.id == id);
+    return this.products.find(product => product.id === id);
   }
+
   getProducts(): Observable<Product[]>
   {
     return this.http.get<Product[]>(this.apiUrl);
   }
-  updatePet(product: Product)
+
+  addProduct(product: Product)
+  {
+    product.id = this.id++;
+    this.products.push(product);
+  }
+  updateProduct(product: Product)
   {
     const productToUpdate = this.products.find(p => product.id === p.id);
     const index = this.products.indexOf(productToUpdate);
