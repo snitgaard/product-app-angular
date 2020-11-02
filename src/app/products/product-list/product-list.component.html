@@ -1,7 +1,11 @@
 <button routerLink="/product-add">Add Product</button>
+<h4>test</h4>
+
+
 <ul *ngIf="products">
   <li *ngFor="let product of products">
-    <a routerLink="/products/{{product.id}}">{{product.name}}</a>
+    <a routerLink="/products/{{product.id}}">
+      {{product.name}}</a>
     <button routerLink="/product-update/{{product.id}}">Update</button>
     <button (click)="delete(product.id)">Delete</button>
   </li>

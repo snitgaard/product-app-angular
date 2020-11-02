@@ -9,7 +9,7 @@ import {ProductService} from '../../shared/services/product.service';
 })
 export class ProductListComponent implements OnInit {
 
-  products: Product[] = [];
+  products: Product[];
   constructor(private productService: ProductService) {
   }
 

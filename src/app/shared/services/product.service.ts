@@ -29,7 +29,7 @@ export class ProductService {
 
   getProducts(): Observable<Product[]>
   {
-    return this.http.get<Product[]>(this.apiUrl);
+    return this.http.get<Product[]>('https://localhost:44364/api/product');
   }
 
   addProduct(product: Product)
