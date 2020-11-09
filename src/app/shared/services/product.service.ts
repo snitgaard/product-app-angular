@@ -10,38 +10,25 @@ export class ProductService {
 
   id = 1;
   products: Product[];
-  apiUrl: 'https://localhost:44364/api/product';
+  apiUrl = 'https://localhost:44364/api/product';
   constructor(private http: HttpClient) {
-    this.products = [
-      {
-        id: this.id++, name: 'Johnny Bravo', color: 'Yellow',
-        price: 1000, type: 'Dog'
-      },
-      {
-        id: this.id++, name: 'Obama', color: 'Hmm',
-        price: 15000, type: 'Cat'
-      }];
+    this.products = [];
   }
-  getProductById(id)
+  getProductById(id: number): Observable<any>
   {
-    return this.products.find(product => product.id === id);
+    return this.http.get<Product>(this.apiUrl + "/" + id);
   }
-
   getProducts(): Observable<Product[]>
   {
-    return this.http.get<Product[]>('https://localhost:44364/api/product');
+    return this.http.get<Product[]>(this.apiUrl);
   }
-
-  addProduct(product: Product)
+  addProduct(product: Product): Observable<any>
   {
-    product.id = this.id++;
-    this.products.push(product);
+    return this.http.post<Product>(this.apiUrl, product);
   }
-  updateProduct(product: Product)
+  updateProduct(product: Product): Observable<Product>
   {
-    const productToUpdate = this.products.find(p => product.id === p.id);
-    const index = this.products.indexOf(productToUpdate);
-    this.products[index] = product;
+    return this.http.put<Product>(this.apiUrl + "/" + product.id, product);
   }
   deleteProduct(id: number) : Observable<any>
   {

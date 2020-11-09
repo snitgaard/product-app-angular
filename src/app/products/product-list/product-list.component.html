@@ -1,12 +1,26 @@
-<button routerLink="/product-add">Add Product</button>
-<h4>test</h4>
-
-
-<ul *ngIf="products">
-  <li *ngFor="let product of products">
-    <a routerLink="/products/{{product.id}}">
-      {{product.name}}</a>
-    <button routerLink="/product-update/{{product.id}}">Update</button>
-    <button (click)="delete(product.id)">Delete</button>
-  </li>
-</ul>
+<div class="container">
+  <div class="row">
+    <button class="btn btn-primary mt-1" routerLink="/product-add">Add Product</button>
+  </div>
+  <div class="row" *ngIf="!products">
+    <progressbar class="mt-5 col-4 offset-4 pr-0 pl-0" max="200" [value]="100" type="success" [striped]="true"
+                 [animate]="true">Loading...</progressbar>
+  </div>
+  <div class="row mt-1" *ngIf="products">
+    <div class="col-6 pl-1 pr-1 mt-1 " *ngFor="let product of products">
+      <div class="card">
+        <div class="card-body">
+          <a routerLink="/products/{{product.id}}">
+            {{product.name}} {{product.type}} {{product.color}}</a>
+          <div>{{product.price}}</div>
+        </div>
+        <div class="card-body text-right">
+          <button routerLink="/product-update/{{product.id}}" class="ml-1 btn btn-warning">Update</button>
+          <button (click)="delete(product.id)" class="ml-1 btn btn-danger">Delete</button>
+        </div>
+      </div>
+      <div>
+      </div>
+    </div>
+  </div>
+</div>

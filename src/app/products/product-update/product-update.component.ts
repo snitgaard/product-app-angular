@@ -22,20 +22,25 @@ export class ProductUpdateComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = +this.route.snapshot.paramMap.get('id');
-    const product = this.productService.getProductById(this.id);
-    this.productForm.patchValue({
-      name: product.name,
-      color: product.color,
-      type: product.type,
-      price: product.price
-    });
+    this.productService.getProductById(this.id)
+      .subscribe(productFromRest => {
+        this.productForm.patchValue({
+          name: productFromRest.name,
+          color: productFromRest.color,
+          type: productFromRest.type,
+          price: productFromRest.price
+        })
+      });
+    ;
   }
 
   save()
   {
     const product = this.productForm.value;
     product.id = this.id;
-    this.productService.updateProduct(product);
+    this.productService.updateProduct(product)
+      .subscribe(productedUpdated => {
+        this.router.navigateByUrl('/products');
+      });
   }
-
 }

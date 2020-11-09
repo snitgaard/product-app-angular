@@ -24,9 +24,9 @@ export class ProductAddComponent implements OnInit {
   save()
   {
     const product = this.productForm.value;
-    this.productService.addProduct(product);
-    this.productForm.reset();
-    this.router.navigateByUrl('/products');
+    this.productService.addProduct(product)
+      .subscribe(productedAdded => {
+        this.router.navigateByUrl('/products');
+      })
   }
-
 }
